@@ -146,7 +146,7 @@ resource "google_cloud_run_v2_service" "cloudrun" {
             local.container_internal_ports_map[containers.value.name]
           ) : []
           content {
-            container_port = port.value.internal
+            container_port = ports.value.internal
           }
         }
       }
