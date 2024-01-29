@@ -23,7 +23,9 @@ locals {
     "walrus.seal.io/environment-name" = local.environment_name
     "walrus.seal.io/resource-name"    = local.resource_name
   }
+  name = format("%s-%s-%s", local.project_name,local.environment_name, local.resource_name)
 }
+
 locals {
   wellknown_port_protocols = ["TCP", "UDP"]
 
@@ -99,7 +101,7 @@ locals {
 #
 
 resource "google_cloud_run_v2_service" "cloudrun" {
-  name     = format("%s-", local.resource_name)
+  name     = local.name
   location = "us-central1"
   ingress  = "INGRESS_TRAFFIC_ALL"
 
