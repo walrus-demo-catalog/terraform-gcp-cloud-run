@@ -5,6 +5,8 @@ components:
   schemas:
     variables:
       type: object
+      required:
+      - containers
       properties:
         infrastructure:
           title: Infrastructure
@@ -47,7 +49,7 @@ components:
                 order: 4
           x-walrus-ui:
             colSpan: 12
-            group: Advanced
+            group: Basic
             order: 2
         deployment:
           title: Deployment
@@ -127,7 +129,7 @@ components:
                 order: 1
           x-walrus-ui:
             colSpan: 12
-            group: Advanced
+            group: Basic
             order: 3
         containers:
           title: Containers
