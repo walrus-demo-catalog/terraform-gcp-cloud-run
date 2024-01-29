@@ -112,13 +112,13 @@ resource "google_cloud_run_v2_service" "cloudrun" {
     dynamic "containers" {
       for_each = try(nonsensitive(local.run_containers), local.run_containers)
       content {
-        name  = container.value.name
-        image = container.value.image
+        name  = containers.value.name
+        image = containers.value.image
 
         dynamic "resources" {
-          for_each = container.value.resources != null ? try(
-            [nonsensitive(container.value.resources)],
-            [container.value.resources]
+          for_each = containers.value.resources != null ? try(
+            [nonsensitive(containers.value.resources)],
+            [containers.value.resources]
           ) : []
           content {
             limits = {
@@ -130,9 +130,9 @@ resource "google_cloud_run_v2_service" "cloudrun" {
         }
 
         dynamic "env" {
-          for_each = local.container_ephemeral_envs_map[container.value.name] != null ? try(
-            nonsensitive(local.container_ephemeral_envs_map[container.value.name]),
-            local.container_ephemeral_envs_map[container.value.name]
+          for_each = local.container_ephemeral_envs_map[containers.value.name] != null ? try(
+            nonsensitive(local.container_ephemeral_envs_map[containers.value.name]),
+            local.container_ephemeral_envs_map[containers.value.name]
           ) : []
           content {
             name  = env.value.name
@@ -141,9 +141,9 @@ resource "google_cloud_run_v2_service" "cloudrun" {
         }
 
         dynamic "ports" {
-          for_each = local.container_internal_ports_map[container.value.name] != null ? try(
-            nonsensitive(local.container_internal_ports_map[container.value.name]),
-            local.container_internal_ports_map[container.value.name]
+          for_each = local.container_internal_ports_map[containers.value.name] != null ? try(
+            nonsensitive(local.container_internal_ports_map[containers.value.name]),
+            local.container_internal_ports_map[containers.value.name]
           ) : []
           content {
             container_port = port.value.internal
