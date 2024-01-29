@@ -1,5 +1,7 @@
 locals {
-  connection = google_cloud_run_v2_service.cloudrun.uri
+endpoints = {
+    url = google_cloud_run_v2_service.cloudrun.uri
+  }
 }
 
 #
@@ -11,7 +13,7 @@ output "context" {
   value       = var.context
 }
 
-output "connection" {
-  description = "The connection, the main URI in which this Service is serving traffic."
-  value       = local.connection
+output "endpoints" {
+  description = "The endpoints, a string map, the key is the name, and the value is the URL."
+  value       = local.endpoints
 }

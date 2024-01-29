@@ -153,7 +153,14 @@ resource "google_cloud_run_v2_service" "cloudrun" {
         }
       }
     }
-
-    max_instance_request_concurrency = 1
   }
+}
+
+resource "google_cloud_run_service_iam_binding" "iam_binding" {
+  location = google_cloud_run_v2_service.cloudrun.location
+  service  = google_cloud_run_v2_service.cloudrun.name
+  role     = "roles/run.invoker"
+  members = [
+    "allUsers"
+  ]
 }

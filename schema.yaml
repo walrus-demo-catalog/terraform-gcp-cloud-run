@@ -780,10 +780,10 @@ components:
                 nullable: true
                 properties:
                   cpu:
-                    default: 0.25
+                    default: 1
                     description: |
                       Specify the cpu resources. Unit is core.
-                    minimum: 0.1
+                    minimum: 1
                     nullable: true
                     title: Cpu(Core)
                     type: number

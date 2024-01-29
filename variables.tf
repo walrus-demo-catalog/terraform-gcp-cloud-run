@@ -185,7 +185,7 @@ EOF
       privileged      = optional(bool, false)
     }))
     resources = optional(object({
-      cpu    = optional(number, 0.25)
+      cpu    = optional(number, 1)
       memory = optional(number, 256)
       gpu    = optional(number, 0)
     }))
